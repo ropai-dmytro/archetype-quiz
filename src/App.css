@@ -5,14 +5,12 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Open Sans', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #43513a;
   min-height: 100vh;
-  color: #333;
+  color: #f5ecd7;
   line-height: 1.6;
 }
 
@@ -20,20 +18,75 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: #43513a;
 }
 
-/* Global button styles */
-button {
-  cursor: pointer;
+/* Creamy/golden text color for headers */
+h1, h2, h3, h4, h5, h6 {
+  color: #f5ecd7;
+  font-family: 'Open Sans', Arial, sans-serif;
+}
+
+/* Decorative A for main title */
+.decorative-a {
+  font-family: 'Great Vibes', cursive;
+  font-size: 3.5rem;
+  color: #f5ecd7;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 0.2em;
+  letter-spacing: 0.05em;
+}
+
+/* SVG leaf/plant decorations */
+.svg-decoration {
+  position: absolute;
+  z-index: 0;
+  opacity: 0.18;
+}
+
+/* Example: top left leaf */
+.svg-leaf-top-left {
+  top: 0;
+  left: 0;
+  width: 180px;
+  height: 180px;
+}
+
+/* Example: bottom right leaf */
+.svg-leaf-bottom-right {
+  bottom: 0;
+  right: 0;
+  width: 200px;
+  height: 200px;
+}
+
+button, .start-button, .next-button, .restart-button, .share-button {
+  font-family: 'Open Sans', Arial, sans-serif;
+  background: #7e8d6f;
+  color: #f5ecd7;
+  border-radius: 40px;
   border: none;
-  outline: none;
-  font-family: inherit;
-  transition: all 0.3s ease;
+  padding: 16px 36px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  box-shadow: 0 4px 16px rgba(67, 81, 58, 0.12);
+  transition: background 0.2s, box-shadow 0.2s;
+}
+button:hover, .start-button:hover, .next-button:hover, .restart-button:hover, .share-button:hover {
+  background: #a3b18a;
+  color: #43513a;
+  box-shadow: 0 8px 32px rgba(67, 81, 58, 0.18);
 }
 
-button:disabled {
-  cursor: not-allowed;
-  opacity: 0.6;
+/* Card style for info and results */
+.info-card, .archetype-card, .results-list {
+  background: rgba(245, 236, 215, 0.95);
+  color: #43513a;
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(67, 81, 58, 0.10);
+  padding: 28px;
+  margin-bottom: 24px;
 }
 
 /* Scrollbar styling */
@@ -96,15 +149,13 @@ button:disabled {
   }
 }
 
-/* Responsive design */
+/* Responsive adjustments */
 @media (max-width: 768px) {
-  body {
-    font-size: 16px;
+  .svg-leaf-top-left, .svg-leaf-bottom-right {
+    width: 100px;
+    height: 100px;
   }
-}
-
-@media (max-width: 480px) {
-  body {
-    font-size: 14px;
+  .info-card, .archetype-card, .results-list {
+    padding: 18px;
   }
 }

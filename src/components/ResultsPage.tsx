@@ -4,9 +4,20 @@ import { archetypes } from '../data/questions';
 import { ResultsPageProps } from '../types';
 import './ResultsPage.css';
 
+const svgLeaf = (
+  <svg className="svg-decoration svg-leaf-top-left" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M40 160 Q80 80 160 40 Q120 120 40 160 Z" fill="#f5ecd7"/>
+  </svg>
+);
+const svgLeaf2 = (
+  <svg className="svg-decoration svg-leaf-bottom-right" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M160 40 Q120 120 40 160 Q80 80 160 40 Z" fill="#f5ecd7"/>
+  </svg>
+);
+
 const ResultsPage: React.FC<ResultsPageProps> = ({ results, onRestart }) => {
-  const { primaryArchetype, allScores, sortedArchetypes } = results;
-  const primaryArchetypeData = archetypes[primaryArchetype.archetype];
+  const { sortedArchetypes, allScores } = results;
+  const top3 = sortedArchetypes.slice(0, 3);
 
   // Prepare data for radar chart
   const chartData = Object.entries(allScores).map(([archetype, score]) => ({
@@ -16,51 +27,59 @@ const ResultsPage: React.FC<ResultsPageProps> = ({ results, onRestart }) => {
   }));
 
   const handleShare = (): void => {
+    const main = top3[0];
     if (navigator.share) {
       navigator.share({
         title: 'Мій архетип',
-        text: `Мій домінуючий архетип: ${primaryArchetypeData.name}`,
+        text: `Мій домінуючий архетип: ${archetypes[main.archetype].name}`,
         url: window.location.href
       }).catch(() => {
-        // Fallback to clipboard
-        navigator.clipboard.writeText(`Мій домінуючий архетип: ${primaryArchetypeData.name}`);
+        navigator.clipboard.writeText(`Мій домінуючий архетип: ${archetypes[main.archetype].name}`);
       });
     } else {
-      // Fallback to clipboard
-      navigator.clipboard.writeText(`Мій домінуючий архетип: ${primaryArchetypeData.name}`);
+      navigator.clipboard.writeText(`Мій домінуючий архетип: ${archetypes[main.archetype].name}`);
     }
   };
 
   return (
-    <div className="results-page">
+    <div className="results-page" style={{ position: 'relative', overflow: 'hidden' }}>
+      {svgLeaf}
+      {svgLeaf2}
       <div className="results-header">
-        <h1>Твій результат</h1>
-        <p className="results-subtitle">Відкрий свій домінуючий архетип</p>
+        <h1>
+          <span className="decorative-a">А</span>рхетипи: Твій результат
+        </h1>
+        <p className="results-subtitle">Топ-3 архетипи, які найбільше проявлені у твоїй особистості</p>
       </div>
 
-      <div className="primary-result">
-        <div className="archetype-card">
-          <div className="archetype-header">
-            <h2 className="archetype-name">{primaryArchetypeData.name}</h2>
-            <div className="archetype-score">
-              <span className="score-number">{primaryArchetype.score}</span>
-              <span className="score-label">балів</span>
+      <div className="primary-result" style={{ display: 'flex', gap: 24, flexWrap: 'wrap', justifyContent: 'center' }}>
+        {top3.map((item, idx) => {
+          const data = archetypes[item.archetype];
+          return (
+            <div className="archetype-card" key={item.archetype} style={{ maxWidth: 320, minWidth: 240, textAlign: 'center', position: 'relative', zIndex: 1 }}>
+              <img
+                src={`/${item.archetype}.PNG`}
+                alt={data.name}
+                style={{ width: 120, height: 120, objectFit: 'cover', objectPosition: 'top', borderRadius: '50%', marginBottom: 16, background: '#e6e2d3', boxShadow: '0 4px 16px rgba(67,81,58,0.10)' }}
+                loading="lazy"
+              />
+              <h2 style={{ fontWeight: 700, fontSize: '1.4rem', margin: '0 0 8px 0', color: '#43513a' }}>{data.name}</h2>
+              <div style={{ fontWeight: 600, color: '#7e8d6f', marginBottom: 8 }}>{item.score} балів</div>
+              <div style={{ fontSize: '1rem', color: '#43513a', marginBottom: 12 }}>{data.description}</div>
+              <div style={{ fontSize: '0.95rem', color: '#7e8d6f' }}>
+                <b>Ключові якості:</b> {data.traits.join(', ')}
+              </div>
             </div>
-          </div>
-          
-          <p className="archetype-description">
-            {primaryArchetypeData.description}
-          </p>
-          
-          <div className="archetype-traits">
-            <h3>Ключові якості:</h3>
-            <div className="traits-list">
-              {primaryArchetypeData.traits.map((trait, index) => (
-                <span key={index} className="trait-tag">{trait}</span>
-              ))}
-            </div>
-          </div>
-        </div>
+          );
+        })}
+      </div>
+
+      {/* Full description for the top archetype */}
+      <div className="top-archetype-description" style={{ background: '#f3e8d2', color: '#43513a', borderRadius: 24, padding: 32, margin: '40px auto 24px auto', maxWidth: 700, boxShadow: '0 4px 24px rgba(67,81,58,0.10)', fontSize: '1.08rem', lineHeight: 1.7 }}>
+        <h2 style={{ color: '#7b8c6a', fontWeight: 800, fontSize: '1.5rem', marginBottom: 18, textAlign: 'center' }}>
+          {archetypes[top3[0].archetype].name}: повний опис
+        </h2>
+        <div style={{ whiteSpace: 'pre-line' }}>{archetypes[top3[0].archetype].fullDescription}</div>
       </div>
 
       <div className="chart-section">
@@ -71,18 +90,18 @@ const ResultsPage: React.FC<ResultsPageProps> = ({ results, onRestart }) => {
               <PolarGrid />
               <PolarAngleAxis 
                 dataKey="archetype" 
-                tick={{ fontSize: 12, fill: '#666' }}
+                tick={{ fontSize: 12, fill: '#43513a' }}
               />
               <PolarRadiusAxis 
                 angle={90} 
                 domain={[0, Math.max(...Object.values(allScores))]}
-                tick={{ fontSize: 10, fill: '#999' }}
+                tick={{ fontSize: 10, fill: '#7e8d6f' }}
               />
               <Radar
                 name="Твій профіль"
                 dataKey="score"
-                stroke="#6366f1"
-                fill="#6366f1"
+                stroke="#7e8d6f"
+                fill="#a3b18a"
                 fillOpacity={0.3}
               />
             </RadarChart>
@@ -93,7 +112,7 @@ const ResultsPage: React.FC<ResultsPageProps> = ({ results, onRestart }) => {
       <div className="all-results">
         <h3>Всі архетипи (за рейтингом)</h3>
         <div className="results-list">
-          {sortedArchetypes.map((item, index) => (
+          {results.sortedArchetypes.map((item, index) => (
             <div key={item.archetype} className="result-item">
               <div className="result-rank">#{index + 1}</div>
               <div className="result-info">

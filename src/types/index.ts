@@ -13,6 +13,7 @@ export interface ArchetypeData {
   name: string;
   description: string;
   traits: string[];
+  fullDescription: string;
 }
 
 export interface Archetypes {
