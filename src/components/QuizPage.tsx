@@ -1,54 +1,52 @@
 import React, { useState, useEffect } from 'react';
-import { questions } from '../data/questions';
+import quizData from '../data/questions';
 import { QuizPageProps, QuizResults } from '../types';
 import './QuizPage.css';
 
 const QuizPage: React.FC<QuizPageProps> = ({ onFinish, onBack }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
   const [scores, setScores] = useState<Record<string, number>>({});
-  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
+  const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [isAnswered, setIsAnswered] = useState<boolean>(false);
 
-  const currentQuestion = questions[currentQuestionIndex];
-  const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+  const currentQuestion = quizData.questions[currentQuestionIndex];
+  const progress = ((currentQuestionIndex + 1) / quizData.questions.length) * 100;
 
   useEffect(() => {
-    setSelectedAnswer(null);
+    setSelectedOption(null);
     setIsAnswered(false);
   }, [currentQuestionIndex]);
 
-  const handleAnswerSelect = (answerIndex: number): void => {
+  const handleOptionSelect = (optionIndex: number): void => {
     if (isAnswered) return;
-    setSelectedAnswer(answerIndex);
+    setSelectedOption(optionIndex);
   };
 
   const handleNext = (): void => {
-    if (selectedAnswer === null) return;
+    if (selectedOption === null) return;
 
-    const answer = currentQuestion.answers[selectedAnswer];
-    
+    const option = quizData.options[selectedOption];
+    const archetype = currentQuestion.archetype;
+    const weight = option.weight;
+
     // Update scores
     const newScores = { ...scores };
-    Object.entries(answer.scores).forEach(([archetype, score]) => {
-      newScores[archetype] = (newScores[archetype] || 0) + score;
-    });
+    newScores[archetype] = (newScores[archetype] || 0) + weight;
     setScores(newScores);
 
     // Move to next question or finish
-    if (currentQuestionIndex < questions.length - 1) {
+    if (currentQuestionIndex < quizData.questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
       // Calculate final results
       const sortedArchetypes = Object.entries(newScores)
         .sort(([,a], [,b]) => b - a)
         .map(([archetype, score]) => ({ archetype, score }));
-      
       const results: QuizResults = {
         primaryArchetype: sortedArchetypes[0],
         allScores: newScores,
         sortedArchetypes
       };
-      
       onFinish(results);
     }
   };
@@ -75,24 +73,23 @@ const QuizPage: React.FC<QuizPageProps> = ({ onFinish, onBack }) => {
             ></div>
           </div>
           <span className="progress-text">
-            {currentQuestionIndex + 1} з {questions.length}
+            {currentQuestionIndex + 1} з {quizData.questions.length}
           </span>
         </div>
       </div>
 
       <div className="question-container">
         <h2 className="question-text">{currentQuestion.text}</h2>
-        
         <div className="answers-container">
-          {currentQuestion.answers.map((answer, index) => (
+          {quizData.options.map((option, index) => (
             <button
               key={index}
-              className={`answer-button ${selectedAnswer === index ? 'selected' : ''} ${isAnswered ? 'answered' : ''}`}
-              onClick={() => handleAnswerSelect(index)}
+              className={`answer-button ${selectedOption === index ? 'selected' : ''} ${isAnswered ? 'answered' : ''}`}
+              onClick={() => handleOptionSelect(index)}
               disabled={isAnswered}
             >
-              <span className="answer-text">{answer.text}</span>
-              {selectedAnswer === index && (
+              <span className="answer-text">{option.label}</span>
+              {selectedOption === index && (
                 <span className="check-icon">✓</span>
               )}
             </button>
@@ -102,11 +99,11 @@ const QuizPage: React.FC<QuizPageProps> = ({ onFinish, onBack }) => {
 
       <div className="quiz-footer">
         <button
-          className={`next-button ${selectedAnswer !== null ? 'active' : ''}`}
+          className={`next-button ${selectedOption !== null ? 'active' : ''}`}
           onClick={handleNext}
-          disabled={selectedAnswer === null}
+          disabled={selectedOption === null}
         >
-          {currentQuestionIndex < questions.length - 1 ? 'Далі' : 'Завершити'}
+          {currentQuestionIndex < quizData.questions.length - 1 ? 'Далі' : 'Завершити'}
         </button>
       </div>
     </div>

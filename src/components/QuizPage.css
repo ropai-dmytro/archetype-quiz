@@ -47,7 +47,7 @@
 
 .progress-fill {
   height: 100%;
-  background: linear-gradient(45deg, #4f46e5, #7c3aed);
+  background: linear-gradient(45deg, #fffbe6, #f3e8d2);
   border-radius: 4px;
   transition: width 0.5s ease;
 }
@@ -103,13 +103,13 @@
 .answer-button:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-  border-color: #4f46e5;
+  border-color: #fffbe6;
 }
 
 .answer-button.selected {
-  background: linear-gradient(45deg, #4f46e5, #7c3aed);
+  background: linear-gradient(45deg, #7E8E67, #6c7957);
   color: white;
-  border-color: #4f46e5;
+  border-color: #fffbe6;
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(79, 70, 229, 0.3);
 }
@@ -139,24 +139,25 @@
 }
 
 .next-button {
-  background: linear-gradient(45deg, #4f46e5, #7c3aed);
+  background: linear-gradient(45deg, #7E8E67, #6c7957);
   color: white;
   padding: 15px 40px;
   border-radius: 50px;
   font-size: 1.1rem;
   font-weight: 600;
-  box-shadow: 0 8px 25px rgba(79, 70, 229, 0.3);
+  box-shadow: 0 8px 25px rgba(18, 155, 82, 0.144);
   transition: all 0.3s ease;
-  opacity: 0.6;
+  /* opacity: 0.6; */
 }
 
 .next-button.active {
-  opacity: 1;
+  transform: translateY(0);
 }
 
 .next-button.active:hover {
+  background: #6a7a5a;
   transform: translateY(-2px);
-  box-shadow: 0 12px 35px rgba(79, 70, 229, 0.4);
+  box-shadow: 0 12px 35px rgba(123, 140, 106, 0.2);
 }
 
 .next-button.active:active {

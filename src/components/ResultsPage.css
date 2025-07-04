@@ -221,14 +221,14 @@
 }
 
 .restart-button {
-  background: linear-gradient(45deg, #4f46e5, #7c3aed);
+  background: linear-gradient(45deg, #7E8E67, #6c7957);
   color: white;
-  box-shadow: 0 8px 25px rgba(79, 70, 229, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .restart-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 35px rgba(79, 70, 229, 0.4);
+  box-shadow: 0 8px 25px rgba(79, 70, 229, 0.3);
 }
 
 .share-button {

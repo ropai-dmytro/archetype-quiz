@@ -29,13 +29,11 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Decorative A for main title */
 .decorative-a {
-  font-family: 'Great Vibes', cursive;
-  font-size: 3.5rem;
-  color: #f5ecd7;
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 0.2em;
-  letter-spacing: 0.05em;
+  font-family: 'Parisienne', cursive, serif;
+  font-size: 6.5rem;
+  color: #f3e8d2;
+  margin-right: -0.01em;
+  line-height: 1;
 }
 
 /* SVG leaf/plant decorations */
