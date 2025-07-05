@@ -84,10 +84,10 @@ const HomePage: React.FC<HomePageProps> = ({ onStartQuiz }) => {
       <div className="content">
         {/* Block 1: What are archetypes */}
         <div ref={defRef} className="archetype-definition-block scroll-reveal">
-          <div className="archetype-benefits-title">ЩО ТАКЕ АРХЕТИПИ</div>
+          <div className="archetype-definition-title">ЩО ТАКЕ АРХЕТИПИ</div>
           <div className="archetype-definition-description">
-            Архетипи — це універсальні психологічні паттерни, які існують у колективному підсвідомому людства. Вони є базовими моделями поведінки, емоцій та думок, які проявляються у міфах, казках, літературі та повсякденному житті.
-            <br/><br/>
+            Архетипи - це універсальні психологічні паттерни, які існують у колективному підсвідомому людства. Вони є базовими моделями поведінки, емоцій та думок, які проявляються у міфах, казках, літературі та повсякденному житті.
+            <br /><br />
             Кожен архетип має свої унікальні характеристики, сильні сторони та виклики. Розуміння своїх домінуючих архетипів допомагає краще зрозуміти себе, свої мотиви та взаємодію з навколишнім світом.
           </div>
         </div>
@@ -95,16 +95,57 @@ const HomePage: React.FC<HomePageProps> = ({ onStartQuiz }) => {
         {/* Block 2: Who needs archetypes and why */}
         <div ref={benRef} className="archetype-benefits-block scroll-reveal">
           <div className="archetype-benefits-title">КОМУ ПОТРІБНІ АРХЕТИПИ І ЧИМ ВОНИ КОРИСНІ</div>
-          <div className="archetype-benefits-description">
-            {benefits.map((text, idx) => (
-              <div 
-                ref={(el) => {
-                  cardRefs.current[idx] = el;
-                }}
-                className={`benefit-card scroll-reveal${idx === benefits.length - 1 ? ' benefit-card-accent' : ''}`} 
-                key={idx}
-              >
-                {text}
+          <div className="archetype-benefits-cards-grid">
+            {[
+              {
+                icon: (
+                  <svg width="28" height="28" fill="none" stroke="#f3e8d2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                ),
+                title: 'Для тих, хто шукає себе',
+                desc: 'Архетипи допоможуть зрозуміти, хто ти є насправді, без масок і чужих очікувань.'
+              },
+              {
+                icon: (
+                  <svg width="28" height="28" fill="none" stroke="#f3e8d2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path><rect width="20" height="14" x="2" y="6" rx="2"></rect></svg>
+                ),
+                title: 'Для особистого бренду',
+                desc: 'Архетипи - це основа твоєї унікальності та стилю комунікації, вони допомагають бути впізнаваною й автентичною.'
+              },
+              {
+                icon: (
+                  <svg width="28" height="28" fill="none" stroke="#f3e8d2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
+                ),
+                title: 'Для психологів і коучів',
+                desc: 'Для глибшої діагностики особистості клієнта і для розуміння його життєвих сценаріїв, потреб і мотивації.'
+              },
+              {
+                icon: (
+                  <svg width="28" height="28" fill="none" stroke="#f3e8d2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path><path d="M9 18h6"></path><path d="M10 22h4"></path></svg>
+                ),
+                title: 'Для бренд-стратегам',
+                desc: 'Для створення автентичного бренду з чітким образом і енергією і для розробки комунікації, що зачіпає підсвідомі бажання аудиторії.'
+              },
+              {
+                icon: (
+                  <svg width="28" height="28" fill="none" stroke="#f3e8d2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path><circle cx="12" cy="13" r="3"></circle></svg>
+                ),
+                title: 'Для стилістам',
+                desc: 'Для побудови стилю клієнта, що відповідає його енергії, а не лише моді.'
+              },
+              {
+                icon: (
+                  <svg width="28" height="28" fill="none" stroke="#f3e8d2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><polyline points="16 11 18 13 22 9"></polyline></svg>
+                ),
+                title: 'Для HR-фахівцям',
+                desc: 'Для розуміння ролей людей у команді, сильних сторін і зон розвитку.'
+              }
+            ].map((card, idx) => (
+              <div className="benefit-card-v2" key={idx}>
+                <div className="benefit-card-icon-wrap">{card.icon}</div>
+                <div>
+                  <div className="benefit-card-title">{card.title}</div>
+                  <div className="benefit-card-desc">{card.desc}</div>
+                </div>
               </div>
             ))}
           </div>
@@ -129,7 +170,7 @@ const HomePage: React.FC<HomePageProps> = ({ onStartQuiz }) => {
           людину об'ємно, її внутрішній світ, тіло, образ, поведінку, енергію та шлях.
           </div>
           <div className="author-social" style={{ marginTop: 20, textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10 }}>
-            <a href="https://www.instagram.com/anna_ropai/" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.instagram.com/annaropai_psy" target="_blank" rel="noopener noreferrer">
               <img src="/insta.png" alt="Instagram" style={{ width: 32, height: 32, borderRadius: 8, boxShadow: '0 2px 8px rgba(0,0,0,0.08)', background: '#fff', objectFit: 'contain', display: 'inline-block', marginLeft: 8 }} />
             </a>
           </div>

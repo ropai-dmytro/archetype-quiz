@@ -90,25 +90,36 @@
 }
 
 .archetype-definition-block {
-  margin: 40px 0 32px 0;
+  margin: 40px auto 32px auto;
   color: #f3e8d2;
   text-align: left;
   width: 100%;
+  max-width: 900px;
+  background: rgba(243, 232, 210, 0.12);
+  border: 2px solid #b6c7a0;
+  border-radius: 18px;
+  box-shadow: 0 6px 32px 0 rgba(62, 81, 61, 0.10);
+  padding: 38px 38px 32px 38px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.archetype-title {
-  font-size: 2.1rem;
-  font-weight: 700;
-  margin-bottom: 12px;
-  letter-spacing: 1px;
+.archetype-definition-title {
+  font-size: 2.2rem;
+  font-weight: 800;
   color: #f3e8d2;
+  margin-bottom: 24px;
+  text-align: center;
+  letter-spacing: 0.5px;
 }
-.archetype-description {
-  font-size: 1.18rem;
+.archetype-definition-description {
+  font-size: 1.25rem;
   line-height: 1.7;
   color: #f3e8d2;
   text-align: left;
   margin-left: 0;
   margin-right: 0;
+  max-width: 800px;
 }
 
 .archetype-benefits-block {
@@ -498,5 +509,82 @@
   .author-photo img {
     width: 120px;
     height: 120px;
+  }
+}
+
+@media (max-width: 700px) {
+  .archetype-definition-block {
+    padding: 18px 8px 16px 8px;
+    max-width: 98vw;
+  }
+  .archetype-definition-title {
+    font-size: 1.3rem;
+    margin-bottom: 14px;
+  }
+  .archetype-definition-description {
+    font-size: 1.05rem;
+  }
+}
+
+.archetype-benefits-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 2rem;
+  margin-top: 2.5rem;
+}
+.benefit-card-v2 {
+  background: rgba(243, 232, 210, 0.12);
+  border: 2px solid #b6c7a0;
+  border-radius: 18px;
+  box-shadow: 0 2px 12px 0 rgba(62, 81, 61, 0.08);
+  padding: 2.2rem 1.6rem 1.6rem 1.6rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+  transition: box-shadow 0.25s, border-color 0.25s, transform 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+.benefit-card-v2:hover {
+  box-shadow: 0 8px 32px 0 rgba(62, 81, 61, 0.18);
+  border-color: #7b8c6a;
+  transform: translateY(-8px) scale(1.025);
+  z-index: 2;
+}
+.benefit-card-icon-wrap {
+  background: rgba(182, 199, 160, 0.18);
+  border: 1.5px solid #b6c7a0;
+  border-radius: 50%;
+  padding: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-right: 0.5rem;
+}
+.benefit-card-title {
+  font-size: 1.18rem;
+  font-weight: 700;
+  color: #f3e8d2;
+  margin-bottom: 0.5rem;
+}
+.benefit-card-desc {
+  font-size: 1.05rem;
+  color: #f3e8d2;
+  line-height: 1.6;
+}
+@media (max-width: 700px) {
+  .archetype-benefits-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+  .benefit-card-v2 {
+    padding: 1.2rem 0.7rem 1rem 0.7rem;
+  }
+  .benefit-card-title {
+    font-size: 1.05rem;
+  }
+  .benefit-card-desc {
+    font-size: 0.97rem;
   }
 } 
