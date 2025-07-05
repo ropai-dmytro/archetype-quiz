@@ -90,11 +90,10 @@
 }
 
 .archetype-definition-block {
-  margin: 40px auto 32px auto;
+  margin: 40px 0 32px 0;
   color: #f3e8d2;
   text-align: left;
   width: 100%;
-  max-width: 900px;
   background: rgba(243, 232, 210, 0.12);
   border: 2px solid #b6c7a0;
   border-radius: 18px;
@@ -119,7 +118,7 @@
   text-align: left;
   margin-left: 0;
   margin-right: 0;
-  max-width: 800px;
+  width: 100%;
 }
 
 .archetype-benefits-block {

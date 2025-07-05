@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { HomePageProps } from '../types';
 import './HomePage.css';
+import AboutAuthorSection from './AboutAuthorSection';
 
 const HomePage: React.FC<HomePageProps> = ({ onStartQuiz }) => {
   // Scroll reveal refs
@@ -151,29 +152,11 @@ const HomePage: React.FC<HomePageProps> = ({ onStartQuiz }) => {
           </div>
         </div>
 
+
+
         {/* Block 3: About author */}
-        <div ref={authorRef} className="about-author-block scroll-reveal">
-          <div className="about-author-title">ПРО АВТОРА</div>
-          <div className="about-author-content">
-            <div className="author-photo">
-              <img src="/anna.png" alt="Anna Ropai" />
-            </div>
-            <div className="author-info">
-              <div className="author-name">Анна Ропай</div>
-              <div className="author-description">Психолог і наставниця з особистого бренду.
-              </div>
-            </div>
-          </div>
-          <div className="author-bio">
-          Спеціалізуюсь на роботі з архетипами, арт-терапії та психосоматиці. Я багато років вивчаю архетипи через психологію, арт-терапію, метафоричні 
-          карти, Таро як проективний інструмент та матриці долі. Це допомагає мені бачити
-          людину об'ємно, її внутрішній світ, тіло, образ, поведінку, енергію та шлях.
-          </div>
-          <div className="author-social" style={{ marginTop: 20, textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10 }}>
-            <a href="https://www.instagram.com/annaropai_psy" target="_blank" rel="noopener noreferrer">
-              <img src="/insta.png" alt="Instagram" style={{ width: 32, height: 32, borderRadius: 8, boxShadow: '0 2px 8px rgba(0,0,0,0.08)', background: '#fff', objectFit: 'contain', display: 'inline-block', marginLeft: 8 }} />
-            </a>
-          </div>
+        <div ref={authorRef} className="scroll-reveal">
+          <AboutAuthorSection/>
         </div>
       </div>
     </div>
