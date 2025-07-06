@@ -109,7 +109,12 @@ const AuthorPage: React.FC = () => {
                   <li>Персональні рекомендації</li>
                   <li>План розвитку</li>
                 </ul>
-                <button className="service-button">Записатись</button>
+                <button 
+                  className="service-button" 
+                  onClick={() => window.open('https://www.instagram.com/annaropai_psy', '_blank')}
+                >
+                  Записатись
+                </button>
               </div>
             </div>
 
@@ -126,7 +131,12 @@ const AuthorPage: React.FC = () => {
                   <li>Психологічна підтримка</li>
                   <li>Домашні завдання</li>
                 </ul>
-                <button className="service-button">Записатись</button>
+                <button 
+                  className="service-button" 
+                  onClick={() => window.open('https://www.instagram.com/annaropai_psy', '_blank')}
+                >
+                  Записатись
+                </button>
               </div>
             </div>
 
@@ -144,7 +154,12 @@ const AuthorPage: React.FC = () => {
                   <li>Підтримка в чаті</li>
                   <li>Персональний план розвитку</li>
                 </ul>
-                <button className="service-button">Записатись</button>
+                <button 
+                  className="service-button" 
+                  onClick={() => window.open('https://www.instagram.com/annaropai_psy', '_blank')}
+                >
+                  Записатись
+                </button>
               </div>
             </div>
           </div>
@@ -158,7 +173,12 @@ const AuthorPage: React.FC = () => {
               Зв'яжіться зі мною для консультації та обговорення ваших потреб
             </p>
             <div className="contact-actions">
-              <button className="contact-button">Записатись на консультацію</button>
+              <button 
+                className="contact-button"
+                onClick={() => window.open('https://www.instagram.com/annaropai_psy', '_blank')}
+              >
+                Записатись на консультацію
+              </button>
               <div className="contact-info">
                 <p>Телефон: +38 (050) 123-45-67</p>
                 <p>Email: anna.ropay@example.com</p>

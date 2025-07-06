@@ -9,6 +9,35 @@ const ResultsPage: React.FC<ResultsPageProps> = ({ results, onRestart }) => {
   const { sortedArchetypes, allScores } = results;
   const top3 = sortedArchetypes.slice(0, 3);
 
+  // Function to format archetype description with highlighted sections
+  const formatArchetypeDescription = (description: string) => {
+    const sections = description.split(/(Тіньові сторони|Як проявляється у житті)/);
+    
+    return sections.map((section, index) => {
+      if (section === 'Тіньові сторони' || section === 'Як проявляється у житті') {
+        return (
+          <span
+            key={index}
+            style={{
+              display: 'inline-block',
+              backgroundColor: '#e8d5b7',
+              color: '#5a4a3a',
+              fontWeight: 'bold',
+              padding: '4px 12px',
+              borderRadius: '8px',
+              margin: '8px 0',
+              fontSize: '1.1rem',
+              border: '2px solid #d4c4a8'
+            }}
+          >
+            {section}
+          </span>
+        );
+      }
+      return section;
+    });
+  };
+
   // State for copy message
   const [copied, setCopied] = useState(false);
   const [buttonText, setButtonText] = useState('Поділитися результатом');
@@ -164,7 +193,9 @@ const ResultsPage: React.FC<ResultsPageProps> = ({ results, onRestart }) => {
         <h2 style={{ color: '#7b8c6a', fontWeight: 800, fontSize: '1.5rem', marginBottom: 18, textAlign: 'center' }}>
           {archetypes[top3[0].archetype].name}: повний опис
         </h2>
-        <div style={{ whiteSpace: 'pre-line' }}>{archetypes[top3[0].archetype].fullDescription}</div>
+        <div style={{ whiteSpace: 'pre-line' }}>
+          {formatArchetypeDescription(archetypes[top3[0].archetype].fullDescription)}
+        </div>
       </div>
 
       <div ref={chartRef} className="chart-section scroll-reveal">

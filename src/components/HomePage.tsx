@@ -134,21 +134,21 @@ const HomePage: React.FC<HomePageProps> = ({ onStartQuiz }) => {
                 icon: (
                   <svg width="28" height="28" fill="none" stroke="#f3e8d2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path><path d="M9 18h6"></path><path d="M10 22h4"></path></svg>
                 ),
-                title: 'Для бренд-стратегам',
+                title: 'Бренд-стратегам',
                 desc: 'Для створення автентичного бренду з чітким образом і енергією і для розробки комунікації, що зачіпає підсвідомі бажання аудиторії.'
               },
               {
                 icon: (
                   <svg width="28" height="28" fill="none" stroke="#f3e8d2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path><circle cx="12" cy="13" r="3"></circle></svg>
                 ),
-                title: 'Для стилістам',
+                title: 'Cтилістам',
                 desc: 'Для побудови стилю клієнта, що відповідає його енергії, а не лише моді.'
               },
               {
                 icon: (
                   <svg width="28" height="28" fill="none" stroke="#f3e8d2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><polyline points="16 11 18 13 22 9"></polyline></svg>
                 ),
-                title: 'Для HR-фахівцям',
+                title: 'HR-фахівцям',
                 desc: 'Для розуміння ролей людей у команді, сильних сторін і зон розвитку.'
               }
             ].map((card, idx) => (
