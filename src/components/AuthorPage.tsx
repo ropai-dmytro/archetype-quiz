@@ -1,10 +1,11 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AuthorPage.css';
 
 const AuthorPage: React.FC = () => {
   const navigate = useNavigate();
   const sectionRefs = useRef<(HTMLElement | null)[]>([]);
+  const [selectedDiploma, setSelectedDiploma] = useState<string | null>(null);
 
   useEffect(() => {
     // Scroll to top when component mounts
@@ -87,6 +88,73 @@ const AuthorPage: React.FC = () => {
           </div>
         </section>
 
+        {/* Education & Certificates Section */}
+        <section className="author-education mb-16 fade-in-up stagger-3">
+          <div className="text-center mb-12">
+            <h2 className="section-title flex items-center justify-center gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-award w-8 h-8 text-green-600"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"></path><circle cx="12" cy="8" r="6"></circle></svg>
+              Освіта та сертифікати
+            </h2>
+            <p className="services-subtitle">
+              Професійна підготовка та постійне вдосконалення для надання якісних послуг
+            </p>
+          </div>
+          <div className="education-grid grid grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {[
+              {
+                img: '/diploma_1.png',
+                title: 'Магістр психології',
+                desc: 'Київський національний університет',
+              },
+              {
+                img: '/diploma_2.png',
+                title: 'Сертифікат арт-терапевта',
+                desc: 'Міжнародний інститут арт-терапії',
+              },
+              {
+                img: '/diploma_3.png',
+                title: 'Спеціалізація з архетипів',
+                desc: 'Європейський центр психології',
+              },
+              {
+                img: '/diploma_4.png',
+                title: 'Курс з психосоматики',
+                desc: 'Інститут сучасної психології',
+              },
+              {
+                img: '/diploma_5.png',
+                title: 'Підвищення кваліфікації',
+                desc: 'Асоціація психологів України',
+              },
+              {
+                img: '/diploma_6.png',
+                title: 'Міжнародний сертифікат',
+                desc: 'European Psychology Center',
+              },
+            ].map((diploma, idx) => (
+              <div key={idx} className="diploma-card rounded-lg text-card-foreground bg-card/90 backdrop-blur-sm border-2 border-green-300 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 fade-in-up stagger-4">
+                <div className="relative overflow-hidden rounded-t-lg h-48 cursor-pointer" onClick={() => setSelectedDiploma(diploma.img)}>
+                  <img src={diploma.img} alt={diploma.title} className="w-full h-full object-cover transition-transform duration-300 hover:scale-110" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                  <div className="absolute bottom-4 left-4 text-white"></div>
+                </div>
+                <div className="p-6">
+                  <h3 className="tracking-tight text-lg font-bold text-primary mb-2">{diploma.title}</h3>
+                  <p className="text-muted-foreground text-sm">{diploma.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          {selectedDiploma && (
+            <div className="diploma-modal-overlay" onClick={() => setSelectedDiploma(null)}>
+              <div className="diploma-modal" onClick={e => e.stopPropagation()}>
+                <button className="diploma-modal-close" onClick={() => setSelectedDiploma(null)}>&times;</button>
+                <img src={selectedDiploma} alt="Diploma Full Size" className="diploma-modal-img" />
+              </div>
+            </div>
+          )}
+        </section>
+
         {/* Services Section */}
         <section ref={(el) => { sectionRefs.current[2] = el; }} className="author-services scroll-reveal">
           <div className="services-header">
@@ -98,16 +166,17 @@ const AuthorPage: React.FC = () => {
           <div className="services-grid">
             <div className="service-card">
               <div className="service-header">
-                <h3>Консультація з архетипами</h3>
-                <div className="service-price">1500 грн</div>
-                <div className="service-duration">60 хв</div>
+                <h3>Портрет особистості</h3>
+                <div className="service-price">100 zl / 1000 грн</div>
+                <div className="service-duration">до 7 днів</div>
               </div>
               <div className="service-content">
-                <p>Індивідуальна сесія для визначення вашого провідного архетипу та отримання персональних рекомендацій</p>
+                <p>На основі системи 22 архетипів ти дізнаєшся</p>
                 <ul className="service-features">
-                  <li>Детальний аналіз архетипу</li>
-                  <li>Персональні рекомендації</li>
-                  <li>План розвитку</li>
+                  <li>Твої сильні сторони та тіньові, як це використовувати</li>
+                  <li>Які професії та проекти розкриють твій потенціал</li>
+                  <li>Як працювати зі страхами, що блокують шлях</li>
+                  <li>Що важливо посилювати, щоб бути помітною, впізнаваною та цілісною</li>
                 </ul>
                 <button 
                   className="service-button" 
@@ -120,16 +189,18 @@ const AuthorPage: React.FC = () => {
 
             <div className="service-card">
               <div className="service-header">
-                <h3>Арт-терапевтична сесія</h3>
-                <div className="service-price">1200 грн</div>
-                <div className="service-duration">90 хв</div>
+                <h3>Індивідуальна консультація</h3>
+                <div className="service-price">300zl / 3000 грн</div>
+                <div className="service-duration">1,5 години</div>
               </div>
               <div className="service-content">
-                <p>Робота через творчість для розкриття внутрішнього потенціалу та гармонізації стану</p>
+                <p>Розберемо твій запит від особистих тем до розвитку блогу та особистого бренду</p>
                 <ul className="service-features">
-                  <li>Творча самовиразність</li>
-                  <li>Психологічна підтримка</li>
-                  <li>Домашні завдання</li>
+                  <li>Розберемо твій запит від особистих тем до розвитку блогу та особистого бренду</li>
+                  <li>Визначимо твій провідний архетип за методом Пірсона та як його використовувати у житті й бренді</li>
+                  <li>Розберемо те, що блокує твій прояв і впевненість</li>
+                  <li>Знайдемо твої сильні сторони, сенси й унікальність</li>
+                  <li>Допоможу сформувати стиль і енергію твого блогу, щоб він був живим, теплим і цілісним</li>
                 </ul>
                 <button 
                   className="service-button" 
@@ -140,28 +211,6 @@ const AuthorPage: React.FC = () => {
               </div>
             </div>
 
-            <div className="service-card">
-              <div className="service-header">
-                <h3>Комплексна програма</h3>
-                <div className="service-price">4500 грн</div>
-                <div className="service-duration">3 сесії</div>
-              </div>
-              <div className="service-content">
-                <p>Повний курс роботи з архетипами, включаючи арт-терапію та індивідуальний супровід</p>
-                <ul className="service-features">
-                  <li>3 індивідуальні сесії</li>
-                  <li>Матеріали для роботи</li>
-                  <li>Підтримка в чаті</li>
-                  <li>Персональний план розвитку</li>
-                </ul>
-                <button 
-                  className="service-button" 
-                  onClick={() => window.open('https://www.instagram.com/annaropai_psy', '_blank')}
-                >
-                  Записатись
-                </button>
-              </div>
-            </div>
           </div>
         </section>
 

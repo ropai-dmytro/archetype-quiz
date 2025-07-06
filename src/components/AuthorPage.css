@@ -166,6 +166,8 @@
   max-width: 600px;
   margin: 0 auto;
   line-height: 1.6;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .services-grid {
@@ -426,4 +428,122 @@
   .service-price {
     font-size: 1.8rem;
   }
+}
+
+/* Diploma cards grid */
+.education-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  justify-items: center;
+}
+
+.diploma-card {
+  max-width: 260px;
+  min-width: 200px;
+  background: rgba(243, 232, 210, 0.12);
+  border-radius: 16px;
+  border: 2px solid #b6c7a0;
+  box-shadow: 0 4px 16px rgba(67,81,58,0.10);
+  overflow: hidden;
+  transition: box-shadow 0.3s, transform 0.3s;
+  margin: 0 auto;
+}
+.diploma-card:hover {
+  box-shadow: 0 8px 32px rgba(67,81,58,0.18);
+  transform: scale(1.04);
+}
+.diploma-card .relative {
+  height: 140px;
+  background: #e6e2d3;
+}
+.diploma-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #fff;
+  display: block;
+}
+.diploma-card .p-6 {
+  padding: 18px 16px 16px 16px;
+}
+.diploma-card h3 {
+  font-size: 1.08rem;
+  margin-bottom: 6px;
+}
+.diploma-card p {
+  font-size: 0.95rem;
+  color: #e6e2d3;
+}
+@media (max-width: 700px) {
+  .education-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .diploma-card {
+    max-width: 100%;
+    min-width: 0;
+  }
+  .diploma-card .relative {
+    height: 100px;
+  }
+}
+@media (max-width: 480px) {
+  .education-grid {
+    grid-template-columns: 1fr;
+  }
+  .diploma-card .relative {
+    height: 80px;
+  }
 } 
+
+.author-education {
+  margin-bottom: 60px;
+}
+
+.diploma-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(30, 41, 36, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.diploma-modal {
+  position: relative;
+  background: #f3e8d2;
+  border-radius: 16px;
+  box-shadow: 0 8px 40px rgba(30,41,36,0.25);
+  padding: 24px;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.diploma-modal-img {
+  max-width: 80vw;
+  max-height: 70vh;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(30,41,36,0.18);
+  background: #fff;
+}
+.diploma-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  font-size: 2rem;
+  color: #3E513D;
+  cursor: pointer;
+  z-index: 10;
+  transition: color 0.2s;
+}
+.diploma-modal-close:hover {
+  color: #b6c7a0;
+}
