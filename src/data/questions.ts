@@ -2,11 +2,11 @@ import { Question, Archetypes } from '../types';
 
 const quizData = {
   options: [
-    { label: 'Це точно про мене', weight: 5 },
-    { label: 'Скоріше про мене', weight: 4 },
-    { label: 'Не знаю / Нейтрально', weight: 3 },
-    { label: 'Скоріше не про мене', weight: 2 },
-    { label: 'Зовсім не про мене', weight: 1 }
+    { label: 'Це точно про мене', weight: 3 },
+    { label: 'Скоріше про мене', weight: 2 },
+    { label: 'Не знаю / Нейтрально', weight: 1 },
+    { label: 'Скоріше не про мене', weight: 0 },
+    { label: 'Зовсім не про мене', weight: 0 }
   ],
   questions: [
     { id: 1, archetype: 'Jester', text: 'Я люблю веселитися та жартувати.' },
