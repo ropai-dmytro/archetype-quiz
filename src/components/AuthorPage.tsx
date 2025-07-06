@@ -60,24 +60,29 @@ const AuthorPage: React.FC = () => {
             <div className="about-content">
               <div className="about-text">
                 <p>
-                  Спеціалізуюсь на роботі з архетипами, арт-терапії та психосоматиці. 
-                  Я багато років вивчаю архетипи через психологію, арт-терапію, метафоричні карти, 
-                  Таро як проективний інструмент та матриці долі.
+                Cпеціалізуюсь на роботі з архетипами, арт-терапії та психосоматиці.
+                За плечима маю 5 років роботи логопедом-дефектологом,
+                де щодня допомагала дітям розкривати свої можливості, а батькам краще розуміти Ïx.
+                Цей досвід навчив мене головному, що кожна людина унікальна і важливо знайти шлях, як цю унікальність проявити у світі.
+                Зараз я працюю з жінками, допомагаючи їм будувати особистий бренд через архетипи.
                 </p>
                 <p>
-                  Це допомагає мені бачити людину об'ємно, її внутрішній світ, тіло, образ, 
-                  поведінку, енергію та шлях. Моя місія - допомогти вам розкрити свій унікальний 
-                  потенціал і знайти гармонію з собою.
+                Бо я вірю, що особистий бренд є у кожного, навіть якщо ви не ведете блог у вас все
+                одно є особистий бренд, але не кожен знає, який він насправді, яку енергію і сенси
+                несе, а архетипи прекрасний інструмен, щоб в цьому розібратися.
+                Я багато років вивчаю архетипи через психологію, арт-терапію, метафоричні
+                карти, Таро як проективний інструмент та матриці долі. Це допомагає мені бачити
+                людину об'ємно, її внутрішній світ, тіло, образ, поведінку, енергію та шлях.
                 </p>
               </div>
               <div className="credentials">
                 <div className="credential-item">
                   <h3>Освіта та кваліфікація</h3>
-                  <p>Магістр психології, сертифікований арт-терапевт</p>
+                  <p>Магістр психології, арт-терапевт</p>
                 </div>
                 <div className="credential-item">
                   <h3>Досвід роботи</h3>
-                  <p>Понад 5 років практики в галузі психології та особистого розвитку</p>
+                  <p>Понад 5 років практики в галузі психології</p>
                 </div>
                 <div className="credential-item">
                   <h3>Спеціалізація</h3>
@@ -102,45 +107,29 @@ const AuthorPage: React.FC = () => {
           <div className="education-grid grid grid-cols-3 gap-8 max-w-6xl mx-auto">
             {[
               {
-                img: '/diploma_1.png',
-                title: 'Магістр психології',
-                desc: 'Київський національний університет',
+                img: '/diploma_1.png'
               },
               {
-                img: '/diploma_2.png',
-                title: 'Сертифікат арт-терапевта',
-                desc: 'Міжнародний інститут арт-терапії',
+                img: '/diploma_2.png'
               },
               {
-                img: '/diploma_3.png',
-                title: 'Спеціалізація з архетипів',
-                desc: 'Європейський центр психології',
+                img: '/diploma_3.png'
               },
               {
-                img: '/diploma_4.png',
-                title: 'Курс з психосоматики',
-                desc: 'Інститут сучасної психології',
+                img: '/diploma_4.png'
               },
               {
-                img: '/diploma_5.png',
-                title: 'Підвищення кваліфікації',
-                desc: 'Асоціація психологів України',
+                img: '/diploma_5.png'
               },
               {
-                img: '/diploma_6.png',
-                title: 'Міжнародний сертифікат',
-                desc: 'European Psychology Center',
+                img: '/diploma_6.png'
               },
             ].map((diploma, idx) => (
               <div key={idx} className="diploma-card rounded-lg text-card-foreground bg-card/90 backdrop-blur-sm border-2 border-green-300 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 fade-in-up stagger-4">
                 <div className="relative overflow-hidden rounded-t-lg h-48 cursor-pointer" onClick={() => setSelectedDiploma(diploma.img)}>
-                  <img src={diploma.img} alt={diploma.title} className="w-full h-full object-cover transition-transform duration-300 hover:scale-110" />
+                  <img src={diploma.img} className="w-full h-full object-cover transition-transform duration-300 hover:scale-110" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                   <div className="absolute bottom-4 left-4 text-white"></div>
-                </div>
-                <div className="p-6">
-                  <h3 className="tracking-tight text-lg font-bold text-primary mb-2">{diploma.title}</h3>
-                  <p className="text-muted-foreground text-sm">{diploma.desc}</p>
                 </div>
               </div>
             ))}
@@ -219,7 +208,7 @@ const AuthorPage: React.FC = () => {
           <div className="contact-card">
             <h2 className="section-title">Готові розпочати свій шлях до гармонії?</h2>
             <p className="contact-subtitle">
-              Зв'яжіться зі мною для консультації та обговорення ваших потреб
+              Зв'яжіться зі мною в direct для консультації та обговорення ваших потреб
             </p>
             <div className="contact-actions">
               <button 
@@ -228,10 +217,6 @@ const AuthorPage: React.FC = () => {
               >
                 Записатись на консультацію
               </button>
-              <div className="contact-info">
-                <p>Телефон: +38 (050) 123-45-67</p>
-                <p>Email: anna.ropay@example.com</p>
-              </div>
             </div>
           </div>
         </section>

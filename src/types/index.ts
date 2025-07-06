@@ -1,14 +1,3 @@
-export interface Answer {
-  text: string;
-  scores: Record<string, number>;
-}
-
-export interface Question {
-  id: number;
-  text: string;
-  answers: Answer[];
-}
-
 export interface ArchetypeData {
   name: string;
   description: string;
