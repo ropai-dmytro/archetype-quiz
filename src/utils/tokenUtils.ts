@@ -41,7 +41,7 @@ export const decodeToken = (token: string): QuizResults | null => {
     }
     
     return {
-      primaryArchetype: sortedArchetypes[0],
+      primaryArchetypes: sortedArchetypes.length > 0 ? [sortedArchetypes[0].archetype] : [],
       allScores: decodedScores,
       sortedArchetypes
     };

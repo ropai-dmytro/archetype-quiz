@@ -10,15 +10,12 @@ export interface Archetypes {
 }
 
 export interface QuizResults {
-  primaryArchetype: {
-    archetype: string;
-    score: number;
-  };
-  allScores: Record<string, number>;
+  primaryArchetypes: string[];
   sortedArchetypes: Array<{
     archetype: string;
     score: number;
   }>;
+  allScores: Record<string, number>;
 }
 
 export interface HomePageProps {
@@ -33,4 +30,10 @@ export interface QuizPageProps {
 export interface ResultsPageProps {
   results: QuizResults;
   onRestart: () => void;
+}
+
+export interface QuizQuestion {
+  id: number;
+  text: string;
+  archetypes: string[];
 } 

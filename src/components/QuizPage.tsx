@@ -26,12 +26,13 @@ const QuizPage: React.FC<QuizPageProps> = ({ onFinish, onBack }) => {
     if (selectedOption === null) return;
 
     const option = quizData.options[selectedOption];
-    const archetype = currentQuestion.archetype;
     const weight = option.weight;
 
     // Update scores
     const newScores = { ...scores };
-    newScores[archetype] = (newScores[archetype] || 0) + weight;
+    (currentQuestion.archetypes as string[]).flat().forEach((archetype: string) => {
+      newScores[archetype] = (newScores[archetype] || 0) + weight;
+    });
     setScores(newScores);
 
     // Move to next question or finish
@@ -43,7 +44,7 @@ const QuizPage: React.FC<QuizPageProps> = ({ onFinish, onBack }) => {
         .sort(([,a], [,b]) => b - a)
         .map(([archetype, score]) => ({ archetype, score }));
       const results: QuizResults = {
-        primaryArchetype: sortedArchetypes[0],
+        primaryArchetypes: sortedArchetypes.length > 0 ? [sortedArchetypes[0].archetype] : [],
         allScores: newScores,
         sortedArchetypes
       };

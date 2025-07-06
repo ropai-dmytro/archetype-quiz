@@ -4,10 +4,7 @@ import { QuizResults } from '../types';
 
 const TokenDemo: React.FC = () => {
   const [demoResults, setDemoResults] = useState<QuizResults>({
-    primaryArchetype: {
-      archetype: 'Sage',
-      score: 45
-    },
+    primaryArchetypes: ['Sage'],
     allScores: {
       Sage: 45,
       Hero: 38,

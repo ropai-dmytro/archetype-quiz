@@ -3,24 +3,7 @@ import { QuizResults } from '../../types';
 
 describe('tokenUtils', () => {
   const mockResults: QuizResults = {
-    primaryArchetype: {
-      archetype: 'Sage',
-      score: 45
-    },
-    allScores: {
-      Sage: 45,
-      Hero: 38,
-      Explorer: 32,
-      Creator: 29,
-      Ruler: 25,
-      Jester: 22,
-      Caregiver: 19,
-      Lover: 16,
-      Magician: 13,
-      Outlaw: 10,
-      Everyman: 7,
-      Innocent: 4
-    },
+    primaryArchetypes: ['Sage'],
     sortedArchetypes: [
       { archetype: 'Sage', score: 45 },
       { archetype: 'Hero', score: 38 },
@@ -34,7 +17,21 @@ describe('tokenUtils', () => {
       { archetype: 'Outlaw', score: 10 },
       { archetype: 'Everyman', score: 7 },
       { archetype: 'Innocent', score: 4 }
-    ]
+    ],
+    allScores: {
+      Sage: 45,
+      Hero: 38,
+      Explorer: 32,
+      Creator: 29,
+      Ruler: 25,
+      Jester: 22,
+      Caregiver: 19,
+      Lover: 16,
+      Magician: 13,
+      Outlaw: 10,
+      Everyman: 7,
+      Innocent: 4
+    }
   };
 
   describe('generateToken', () => {
@@ -64,7 +61,7 @@ describe('tokenUtils', () => {
       
       expect(decoded).not.toBeNull();
       expect(decoded?.allScores).toEqual(mockResults.allScores);
-      expect(decoded?.primaryArchetype).toEqual(mockResults.primaryArchetype);
+      expect(decoded?.primaryArchetypes).toEqual(mockResults.primaryArchetypes);
       expect(decoded?.sortedArchetypes).toEqual(mockResults.sortedArchetypes);
     });
 
