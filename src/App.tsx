@@ -3,6 +3,7 @@ import './App.css';
 import HomePage from './components/HomePage';
 import QuizPage from './components/QuizPage';
 import ResultsPage from './components/ResultsPage';
+import AuthorPage from './components/AuthorPage';
 import { QuizResults } from './types';
 import { generateToken, decodeToken } from './utils/tokenUtils';
 import {
@@ -62,6 +63,7 @@ const App: React.FC = () => {
           <Route path="/" element={<HomePage onStartQuiz={() => window.location.assign('/quiz')} />} />
           <Route path="/quiz" element={<QuizWrapper />} />
           <Route path="/results/:token" element={<ResultsWrapper />} />
+          <Route path="/about" element={<AuthorPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>
