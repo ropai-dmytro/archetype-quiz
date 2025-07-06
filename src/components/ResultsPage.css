@@ -255,6 +255,31 @@
   transform: translateY(-2px);
 }
 
+.share-button.copied {
+  background: linear-gradient(45deg, #96ad74, #7a8e5a);
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(74, 222, 128, 0.4);
+  animation: copySuccess 0.6s ease-out;
+}
+
+.share-button.copied:hover {
+  background: linear-gradient(45deg, #96ad74, #7a8e5a);
+  transform: scale(1.05);
+  box-shadow: 0 12px 35px rgba(15, 198, 155, 0.4);
+}
+
+@keyframes copySuccess {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1.05);
+  }
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
   .results-page {

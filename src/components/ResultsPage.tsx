@@ -11,6 +11,7 @@ const ResultsPage: React.FC<ResultsPageProps> = ({ results, onRestart }) => {
 
   // State for copy message
   const [copied, setCopied] = useState(false);
+  const [buttonText, setButtonText] = useState('Поділитися результатом');
 
   // Refs for sequential reveal
   const headerRef = useRef<HTMLDivElement>(null);
@@ -48,9 +49,15 @@ const ResultsPage: React.FC<ResultsPageProps> = ({ results, onRestart }) => {
   const handleShare = (): void => {
     const shareUrl = createShareableUrl(results);
     
-    // Always show the copied message first
+    // Change button text with animation
+    setButtonText('Скопійовано!');
     setCopied(true);
-    setTimeout(() => setCopied(false), 1800);
+    
+    // Reset after animation
+    setTimeout(() => {
+      setButtonText('Поділитися результатом');
+      setCopied(false);
+    }, 1800);
     
     // Try modern clipboard API first
     if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -66,6 +73,15 @@ const ResultsPage: React.FC<ResultsPageProps> = ({ results, onRestart }) => {
   };
 
   const fallbackCopyTextToClipboard = (text: string): void => {
+    // Modern fallback using Clipboard API with writeText
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).catch(err => {
+        console.error('Failed to copy: ', err);
+      });
+      return;
+    }
+    
+    // Last resort: create a temporary element and use selection API
     const textArea = document.createElement('textarea');
     textArea.value = text;
     textArea.style.position = 'fixed';
@@ -76,7 +92,19 @@ const ResultsPage: React.FC<ResultsPageProps> = ({ results, onRestart }) => {
     textArea.select();
     
     try {
-      document.execCommand('copy');
+      // Use the modern selection API instead of execCommand
+      const selection = window.getSelection();
+      const range = document.createRange();
+      range.selectNodeContents(textArea);
+      selection?.removeAllRanges();
+      selection?.addRange(range);
+      
+      // Try clipboard API again as fallback
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).catch(() => {
+          console.error('Failed to copy to clipboard');
+        });
+      }
     } catch (err) {
       console.error('Failed to copy: ', err);
     }
@@ -193,14 +221,13 @@ const ResultsPage: React.FC<ResultsPageProps> = ({ results, onRestart }) => {
         <button className="restart-button" onClick={onRestart}>
           Пройти тест ще раз
         </button>
-        <button className="share-button" onClick={handleShare}>
-          Поділитися результатом
+        <button 
+          className={`share-button ${copied ? 'copied' : ''}`} 
+          onClick={handleShare}
+          disabled={copied}
+        >
+          {buttonText}
         </button>
-        {copied && (
-          <div style={{ marginTop: 10, color: '#7b8c6a', fontWeight: 600, fontSize: '1.08rem', transition: 'opacity 0.3s', opacity: copied ? 1 : 0 }}>
-            Скопійовано!
-          </div>
-        )}
       </div>
     </div>
   );
