@@ -344,17 +344,6 @@
   }
 }
 
-.leaf-decor {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 180px;
-  height: auto;
-  z-index: 0;
-  opacity: 0.7;
-  pointer-events: none;
-}
-
 .fern-decor {
   position: absolute;
   bottom: 0;
@@ -365,6 +354,33 @@
   opacity: 0.13;
   z-index: 10;
   pointer-events: none;
+}
+
+@media (max-width: 700px) {
+  .fern-decor {
+    width: 320px;
+    top: 10%;
+  }
+}
+
+.fern-top-left {
+  position: absolute;
+  /* top: -4%; */
+  left: -5%;
+  width: 420px;
+  height: 420px;
+  transform: rotate(180deg);
+  z-index: 10;
+  opacity: 0.13;
+  pointer-events: none;
+}
+
+@media (max-width: 700px) {
+  .fern-top-left {
+    width: 320px;
+    /* top: -8%; */
+    left: -10%;
+  }
 }
 
 .about-author-block {

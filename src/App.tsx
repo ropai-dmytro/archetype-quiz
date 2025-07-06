@@ -4,43 +4,69 @@ import HomePage from './components/HomePage';
 import QuizPage from './components/QuizPage';
 import ResultsPage from './components/ResultsPage';
 import { QuizResults } from './types';
+import { generateToken, decodeToken } from './utils/tokenUtils';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+  useParams,
+  Navigate,
+} from 'react-router-dom';
 
-type PageType = 'home' | 'quiz' | 'results';
-
-function App(): React.ReactElement {
-  const [currentPage, setCurrentPage] = useState<PageType>('home');
+// Wrapper for QuizPage to handle navigation
+const QuizWrapper: React.FC = () => {
+  const navigate = useNavigate();
   const [quizResults, setQuizResults] = useState<QuizResults | null>(null);
 
-  const startQuiz = (): void => {
-    setCurrentPage('quiz');
-  };
-
-  const finishQuiz = (results: QuizResults): void => {
+  const finishQuiz = (results: QuizResults) => {
     setQuizResults(results);
-    setCurrentPage('results');
+    // Generate token from results and navigate to tokenized URL
+    const token = generateToken(results);
+    navigate(`/results/${token}`);
   };
 
-  const goHome = (): void => {
-    setCurrentPage('home');
-    setQuizResults(null);
+  return <QuizPage onFinish={finishQuiz} onBack={() => navigate('/')} />;
+};
+
+// Wrapper for ResultsPage to handle both state and token
+const ResultsWrapper: React.FC = () => {
+  const { token } = useParams();
+  const navigate = useNavigate();
+  
+  // Try to get results from location state first (for direct navigation)
+  const state = (window.history.state && window.history.state.usr) || {};
+  let results: QuizResults | null = state.results || null;
+
+  // If no state results, try to decode from token
+  if (!results && token) {
+    results = decodeToken(token);
+  }
+
+  if (!results) {
+    return <Navigate to="/" replace />;
+  }
+
+  const handleRestart = () => {
+    navigate('/', { replace: true });
   };
 
-  const renderPage = (): React.ReactElement => {
-    switch (currentPage) {
-      case 'quiz':
-        return <QuizPage onFinish={finishQuiz} onBack={goHome} />;
-      case 'results':
-        return <ResultsPage results={quizResults!} onRestart={goHome} />;
-      default:
-        return <HomePage onStartQuiz={startQuiz} />;
-    }
-  };
+  return <ResultsPage results={results} onRestart={handleRestart} />;
+};
 
+const App: React.FC = () => {
   return (
-    <div className="App">
-      {renderPage()}
-    </div>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<HomePage onStartQuiz={() => window.location.assign('/quiz')} />} />
+          <Route path="/quiz" element={<QuizWrapper />} />
+          <Route path="/results/:token" element={<ResultsWrapper />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </div>
+    </Router>
   );
-}
+};
 
 export default App; 

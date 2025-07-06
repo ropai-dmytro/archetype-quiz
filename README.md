@@ -1,4 +1,54 @@
-# Getting Started with Create React App
+# Archetype Quiz
+
+A React-based personality quiz that helps users discover their dominant archetypes. The app features a comprehensive questionnaire and provides detailed results with visual charts and descriptions.
+
+## Features
+
+- **Interactive Quiz**: 10 carefully crafted questions to determine your archetype profile
+- **12 Archetypes**: Based on Jungian psychology including Sage, Hero, Explorer, Creator, and more
+- **Visual Results**: Radar charts and detailed descriptions for each archetype
+- **Stateless Sharing**: Share your results via tokenized URLs without requiring a backend
+- **Responsive Design**: Works seamlessly on desktop and mobile devices
+
+## Stateless Results Sharing
+
+The app implements a unique stateless sharing system that allows users to share their quiz results via a single link without requiring a backend server.
+
+### How It Works
+
+1. **Quiz Completion**: When a user completes the quiz, their scores are encoded into a Base64 token
+2. **Token Generation**: The scores object is converted to JSON, then Base64 encoded
+3. **Shareable URL**: A URL is generated in the format `/results/<token>`
+4. **Result Decoding**: When someone visits the link, the token is decoded to reconstruct the results
+
+### Example
+
+```javascript
+// User's quiz results
+const results = {
+  Sage: 45,
+  Hero: 38,
+  Explorer: 32,
+  // ... all 12 archetypes
+};
+
+// Token generation
+const json = JSON.stringify(results);
+const token = btoa(json);
+// Result: "eyJTYWdlIjo0NSwiSGVybyI6MzgsIkV4cGxvcmVyIjozMiw...="
+
+// Shareable URL
+const shareUrl = `https://yourapp.com/results/${token}`;
+```
+
+### Benefits
+
+- **No Backend Required**: All encoding/decoding happens client-side
+- **Privacy Preserving**: Results never leave the user's browser unless shared
+- **Instant Sharing**: No database queries or server processing needed
+- **Cross-Platform**: Works on any device with a web browser
+
+## Getting Started
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

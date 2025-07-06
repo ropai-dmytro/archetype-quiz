@@ -2,6 +2,7 @@ import React from 'react';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from 'recharts';
 import { archetypes } from '../data/questions';
 import { ResultsPageProps } from '../types';
+import { createShareableUrl } from '../utils/tokenUtils';
 import './ResultsPage.css';
 
 const svgLeaf = (
@@ -28,16 +29,21 @@ const ResultsPage: React.FC<ResultsPageProps> = ({ results, onRestart }) => {
 
   const handleShare = (): void => {
     const main = top3[0];
+    const shareText = `Мій домінуючий архетип: ${archetypes[main.archetype].name}`;
+    const shareUrl = createShareableUrl(results);
+    
     if (navigator.share) {
       navigator.share({
         title: 'Мій архетип',
-        text: `Мій домінуючий архетип: ${archetypes[main.archetype].name}`,
-        url: window.location.href
+        text: shareText,
+        url: shareUrl
       }).catch(() => {
-        navigator.clipboard.writeText(`Мій домінуючий архетип: ${archetypes[main.archetype].name}`);
+        // Fallback to clipboard if share fails
+        navigator.clipboard.writeText(`${shareText}\n\nПереглянути повний результат: ${shareUrl}`);
       });
     } else {
-      navigator.clipboard.writeText(`Мій домінуючий архетип: ${archetypes[main.archetype].name}`);
+      // Fallback for browsers without share API
+      navigator.clipboard.writeText(`${shareText}\n\nПереглянути повний результат: ${shareUrl}`);
     }
   };
 
