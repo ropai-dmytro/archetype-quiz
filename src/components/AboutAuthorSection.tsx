@@ -1,6 +1,5 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import './HomePage.css';
 
 const AboutAuthorSection: React.FC = () => {
   const navigate = useNavigate();

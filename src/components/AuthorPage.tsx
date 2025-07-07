@@ -83,11 +83,11 @@ const AuthorPage: React.FC = () => {
               <div className="credentials">
                 <div className="credential-item">
                   <h3>Освіта та кваліфікація</h3>
-                  <p>Магістр психології, арт-терапевт</p>
+                  <p>Магістр психології, спеціаліст у роботі з архетипами</p>
                 </div>
                 <div className="credential-item">
                   <h3>Досвід роботи</h3>
-                  <p>Понад 5 років практики в галузі психології</p>
+                  <p>Понад 5 років практики в галузі психології і педагогіці</p>
                 </div>
                 <div className="credential-item">
                   <h3>Спеціалізація</h3>

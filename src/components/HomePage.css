@@ -1,12 +1,14 @@
-.home-page {
+/* Increase specificity by adding parent selector */
+.home-page,
+div.home-page {
   position: relative;
   min-height: 100vh;
   padding: 20px;
   display: flex;
   flex-direction: column;
   animation: fadeIn 0.8s ease-out;
-  background: #3E513D; /* updated green */
-  color: #f3e8d2; /* creamy/golden text */
+  background: #3E513D !important; /* Force override */
+  color: #f3e8d2 !important; /* Force override */
   font-family: 'Open Sans', Arial, sans-serif;
 }
 

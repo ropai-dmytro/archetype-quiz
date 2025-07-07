@@ -1,0 +1,86 @@
+.homePage {
+  position: relative;
+  min-height: 100vh;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 0.8s ease-out;
+  background: #3E513D; /* updated green */
+  color: #f3e8d2; /* creamy/golden text */
+  font-family: 'Open Sans', Arial, sans-serif;
+}
+
+.heroSection {
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 40px 20px;
+}
+
+.heroContent {
+  margin-bottom: 30px;
+}
+
+.heroTitle {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #f3e8d2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.decorativeA {
+  font-family: 'Parisienne', cursive, serif;
+  font-size: 6.5rem;
+  color: #f3e8d2;
+  margin-right: -0.01em;
+  line-height: 1;
+}
+
+.heroSubtitle {
+  font-size: 1.2rem;
+  color: #f3e8d2;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.ctaSection {
+  text-align: center;
+  padding: 20px;
+}
+
+.startButton {
+  background: linear-gradient(45deg, #7E8E67, #6c7957);
+  color: white;
+  padding: 18px 40px;
+  border-radius: 50px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  box-shadow: 0 8px 25px rgba(18, 155, 82, 0.144);
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+  border: none;
+  cursor: pointer;
+}
+
+.startButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 35px rgba(15, 198, 155, 0.4);
+}
+
+.startButton:active {
+  transform: translateY(0);
+}
+
+.ctaNote {
+  color: #f3e8d2cc;
+  font-size: 1rem;
+  font-style: italic;
+}
+
+/* Add other styles as needed */ 
