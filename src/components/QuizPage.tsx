@@ -4,15 +4,31 @@ import { QuizPageProps, QuizResults } from '../types';
 import { useAnalytics } from '../utils/analytics';
 import './QuizPage.css';
 
+// Fisher-Yates shuffle
+function shuffleArray<T>(array: T[]): T[] {
+  const arr = array.slice();
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
 const QuizPage: React.FC<QuizPageProps> = ({ onFinish, onBack }) => {
   const { trackQuizComplete } = useAnalytics();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
   const [scores, setScores] = useState<Record<string, number>>({});
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [isAnswered, setIsAnswered] = useState<boolean>(false);
+  const [shuffledQuestions, setShuffledQuestions] = useState<typeof quizData.questions>([]);
 
-  const currentQuestion = quizData.questions[currentQuestionIndex];
-  const progress = ((currentQuestionIndex + 1) / quizData.questions.length) * 100;
+  // Shuffle questions only once on mount
+  useEffect(() => {
+    setShuffledQuestions(shuffleArray(quizData.questions));
+  }, []);
+
+  const currentQuestion = shuffledQuestions[currentQuestionIndex];
+  const progress = shuffledQuestions.length > 0 ? ((currentQuestionIndex + 1) / shuffledQuestions.length) * 100 : 0;
 
   useEffect(() => {
     setSelectedOption(null);
@@ -26,6 +42,7 @@ const QuizPage: React.FC<QuizPageProps> = ({ onFinish, onBack }) => {
 
   const handleNext = (): void => {
     if (selectedOption === null) return;
+    if (!currentQuestion) return;
 
     const option = quizData.options[selectedOption];
     const weight = option.weight;
@@ -38,7 +55,7 @@ const QuizPage: React.FC<QuizPageProps> = ({ onFinish, onBack }) => {
     setScores(newScores);
 
     // Move to next question or finish
-    if (currentQuestionIndex < quizData.questions.length - 1) {
+    if (currentQuestionIndex < shuffledQuestions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
       // Calculate final results
@@ -66,6 +83,8 @@ const QuizPage: React.FC<QuizPageProps> = ({ onFinish, onBack }) => {
     }
   };
 
+  if (shuffledQuestions.length === 0) return null;
+
   return (
     <div className="quiz-page">
       <div className="quiz-header">
@@ -80,7 +99,7 @@ const QuizPage: React.FC<QuizPageProps> = ({ onFinish, onBack }) => {
             ></div>
           </div>
           <span className="progress-text">
-            {currentQuestionIndex + 1} з {quizData.questions.length}
+            {currentQuestionIndex + 1} з {shuffledQuestions.length}
           </span>
         </div>
       </div>
@@ -110,7 +129,7 @@ const QuizPage: React.FC<QuizPageProps> = ({ onFinish, onBack }) => {
           onClick={handleNext}
           disabled={selectedOption === null}
         >
-          {currentQuestionIndex < quizData.questions.length - 1 ? 'Далі' : 'Завершити'}
+          {currentQuestionIndex < shuffledQuestions.length - 1 ? 'Далі' : 'Завершити'}
         </button>
       </div>
     </div>
