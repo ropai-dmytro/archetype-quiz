@@ -36,4 +36,19 @@ export interface QuizQuestion {
   id: number;
   text: string;
   archetypes: string[];
+}
+
+export enum ArchetypeEnum {
+  Explorer = 'Explorer',
+  Sage = 'Sage',
+  Hero = 'Hero',
+  Creator = 'Creator',
+  Caregiver = 'Caregiver',
+  Jester = 'Jester',
+  Lover = 'Lover',
+  Ruler = 'Ruler',
+  Magician = 'Magician',
+  Everyman = 'Everyman',
+  Outlaw = 'Outlaw',
+  Innocent = 'Innocent',
 } 

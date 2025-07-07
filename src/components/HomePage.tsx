@@ -1,9 +1,8 @@
 import React, { useEffect, useRef } from 'react';
-import { HomePageProps } from '../types';
 import './HomePage.css';
 import AboutAuthorSection from './AboutAuthorSection';
 
-const HomePage: React.FC<HomePageProps> = ({ onStartQuiz }) => {
+const HomePage: React.FC<any> = ({ onStartQuiz }) => {
   // Scroll reveal refs
   const defRef = useRef<HTMLDivElement>(null);
   const benRef = useRef<HTMLDivElement>(null);

@@ -60,7 +60,8 @@ const App: React.FC = () => {
     <Router>
       <div className="App">
         <Routes>
-          <Route path="/" element={<HomePage onStartQuiz={() => window.location.assign('/quiz')} />} />
+          <Route path="/" element={<Navigate to="/archetype-quiz" replace />} />
+          <Route path="/archetype-quiz" element={<HomePage />} />
           <Route path="/quiz" element={<QuizWrapper />} />
           <Route path="/results/:token" element={<ResultsWrapper />} />
           <Route path="/about" element={<AuthorPage />} />
