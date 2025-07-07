@@ -8,7 +8,6 @@ body {
   font-family: 'Open Sans', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #43513a;
   min-height: 100vh;
   color: #f5ecd7;
   line-height: 1.6;
@@ -18,7 +17,6 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: #43513a;
 }
 
 /* Creamy/golden text color for headers */

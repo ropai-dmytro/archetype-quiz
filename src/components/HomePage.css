@@ -1,4 +1,4 @@
-/* Increase specificity by adding parent selector */
+/* Remove background from .home-page so global body background applies */
 .home-page,
 div.home-page {
   position: relative;
@@ -7,9 +7,18 @@ div.home-page {
   display: flex;
   flex-direction: column;
   animation: fadeIn 0.8s ease-out;
-  background: #3E513D !important; /* Force override */
-  color: #f3e8d2 !important; /* Force override */
+  color: #f3e8d2 !important;
   font-family: 'Open Sans', Arial, sans-serif;
+  z-index: 1;
+}
+
+.home-page::before {
+  display: none;
+}
+
+.home-page > * {
+  position: relative;
+  z-index: 2;
 }
 
 .hero-section {
