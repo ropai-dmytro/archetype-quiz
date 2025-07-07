@@ -1,13 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAnalytics } from '../utils/analytics';
 import './AuthorPage.css';
 
 const AuthorPage: React.FC = () => {
   const navigate = useNavigate();
+  const { trackAboutPageVisit } = useAnalytics();
   const sectionRefs = useRef<(HTMLElement | null)[]>([]);
   const [selectedDiploma, setSelectedDiploma] = useState<string | null>(null);
 
   useEffect(() => {
+    // Track about page visit
+    trackAboutPageVisit();
+    
     // Scroll to top when component mounts
     window.scrollTo(0, 0);
     

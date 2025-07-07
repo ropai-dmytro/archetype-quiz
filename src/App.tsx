@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import HomePage from './components/HomePage';
 import QuizPage from './components/QuizPage';
@@ -6,6 +6,7 @@ import ResultsPage from './components/ResultsPage';
 import AuthorPage from './components/AuthorPage';
 import { QuizResults } from './types';
 import { generateToken, decodeToken } from './utils/tokenUtils';
+import { initGA, trackPageView } from './utils/analytics';
 import {
   BrowserRouter as Router,
   Routes,
@@ -13,6 +14,7 @@ import {
   useNavigate,
   useParams,
   Navigate,
+  useLocation,
 } from 'react-router-dom';
 
 // Wrapper for QuizPage to handle navigation
@@ -55,13 +57,48 @@ const ResultsWrapper: React.FC = () => {
   return <ResultsPage results={results} onRestart={handleRestart} />;
 };
 
+// Component to track page views
+const PageTracker: React.FC = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    // Track page view when location changes
+    const pageName = location.pathname === '/' ? 'Home' : 
+                    location.pathname === '/archetype-quiz' ? 'Home' :
+                    location.pathname === '/quiz' ? 'Quiz' :
+                    location.pathname.startsWith('/results') ? 'Results' :
+                    location.pathname === '/about' ? 'About' : 'Unknown';
+    
+    trackPageView(pageName);
+  }, [location]);
+
+  return null;
+};
+
+// Wrapper for HomePage to handle navigation
+const HomePageWrapper: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleStartQuiz = () => {
+    navigate('/quiz');
+  };
+
+  return <HomePage onStartQuiz={handleStartQuiz} />;
+};
+
 const App: React.FC = () => {
+  useEffect(() => {
+    // Initialize Google Analytics
+    initGA();
+  }, []);
+
   return (
     <Router>
       <div className="App">
+        <PageTracker />
         <Routes>
           <Route path="/" element={<Navigate to="/archetype-quiz" replace />} />
-          <Route path="/archetype-quiz" element={<HomePage />} />
+          <Route path="/archetype-quiz" element={<HomePageWrapper />} />
           <Route path="/quiz" element={<QuizWrapper />} />
           <Route path="/results/:token" element={<ResultsWrapper />} />
           <Route path="/about" element={<AuthorPage />} />

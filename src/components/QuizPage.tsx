@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import quizData from '../data/questions';
 import { QuizPageProps, QuizResults } from '../types';
+import { useAnalytics } from '../utils/analytics';
 import './QuizPage.css';
 
 const QuizPage: React.FC<QuizPageProps> = ({ onFinish, onBack }) => {
+  const { trackQuizComplete } = useAnalytics();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
   const [scores, setScores] = useState<Record<string, number>>({});
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
@@ -48,6 +50,10 @@ const QuizPage: React.FC<QuizPageProps> = ({ onFinish, onBack }) => {
         allScores: newScores,
         sortedArchetypes
       };
+      
+      // Track quiz completion
+      trackQuizComplete();
+      
       onFinish(results);
     }
   };

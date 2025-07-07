@@ -1,8 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import './HomePage.css';
 import AboutAuthorSection from './AboutAuthorSection';
+import { useAnalytics } from '../utils/analytics';
 
 const HomePage: React.FC<any> = ({ onStartQuiz }) => {
+  const { trackHomePageVisit, trackQuizStart } = useAnalytics();
+  
   // Scroll reveal refs
   const defRef = useRef<HTMLDivElement>(null);
   const benRef = useRef<HTMLDivElement>(null);
@@ -10,6 +13,9 @@ const HomePage: React.FC<any> = ({ onStartQuiz }) => {
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
+    // Track home page visit
+    trackHomePageVisit();
+    
     // Scroll to top when component mounts
     window.scrollTo(0, 0);
     
@@ -76,7 +82,10 @@ const HomePage: React.FC<any> = ({ onStartQuiz }) => {
           </p>
         </div>
         <div className="cta-section">
-          <button className="start-button" onClick={onStartQuiz}>
+          <button className="start-button" onClick={() => {
+            trackQuizStart();
+            onStartQuiz();
+          }}>
             ПРОЙТИ ТЕСТ
           </button>
           <p className="cta-note">Тест займе приблизно 15-20 хвилин</p>
