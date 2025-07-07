@@ -90,7 +90,7 @@ const AuthorPage: React.FC = () => {
               <div className="credentials">
                 <div className="credential-item">
                   <h3>Освіта та кваліфікація</h3>
-                  <p>Магістр психології, спеціаліст у роботі з архетипами</p>
+                  <p>Магістр психології, спеціаліст у роботі з архетипами, арт-терапевт для жінок</p>
                 </div>
                 <div className="credential-item">
                   <h3>Досвід роботи</h3>

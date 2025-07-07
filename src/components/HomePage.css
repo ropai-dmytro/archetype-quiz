@@ -388,9 +388,7 @@ div.home-page {
 
 @media (max-width: 700px) {
   .fern-top-left {
-    width: 320px;
-    /* top: -8%; */
-    left: -10%;
+    width: 170px;
   }
 }
 

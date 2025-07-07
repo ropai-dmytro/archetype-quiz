@@ -44,13 +44,13 @@
 
 @media (max-width: 700px) {
   .fern-decor {
-    width: 320px;
-    top: 6%;
+    width: 170px;
+    top: 4%;
   }
   
   .fern-top-left {
-    width: 320px;
-    left: -10%;
+    width: 170px;
+    top: -2%;
   }
 }
 
