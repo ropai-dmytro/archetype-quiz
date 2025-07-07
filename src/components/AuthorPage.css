@@ -21,18 +21,20 @@
 /* Fern decoration */
 .fern-decor {
   position: absolute;
-  top: 0;
+  bottom: 0;
+  top: 8%;
   right: 0;
   width: 420px;
   height: 420px;
-  opacity: 0.18;
-  z-index: 0;
+  opacity: 0.13;
+  z-index: 10;
+  pointer-events: none;
 }
 
 @media (max-width: 700px) {
   .fern-decor {
-    width: 200px;
-    height: 200px;
+    width: 320px;
+    top: 10%;
   }
 }
 
